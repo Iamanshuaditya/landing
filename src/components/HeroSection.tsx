@@ -38,7 +38,6 @@ const textVariants = {
     filter: "blur(0px)",
     transition: {
       duration: 0.8,
-      ease: [0.22, 1, 0.36, 1], // Custom easing for smooth motion
     },
   },
 };
@@ -51,7 +50,6 @@ const headingVariants = {
     y: 0,
     transition: {
       duration: 1,
-      ease: [0.22, 1, 0.36, 1],
     },
   },
 };
@@ -68,7 +66,8 @@ const buttonVariants = {
     y: 0,
     transition: {
       duration: 0.6,
-      ease: [0.34, 1.56, 0.64, 1], // Bouncy ease
+      type: "spring",
+      stiffness: 200,
     },
   },
   hover: {
@@ -94,7 +93,6 @@ const imageVariants = {
     filter: "blur(0px)",
     transition: {
       duration: 1.2,
-      ease: [0.22, 1, 0.36, 1],
       delay: 0.4,
     },
   },
@@ -113,7 +111,6 @@ const logoVariants = {
     transition: {
       duration: 0.5,
       delay: i * 0.05,
-      ease: [0.22, 1, 0.36, 1],
     },
   }),
   hover: {
@@ -146,7 +143,6 @@ const AnimatedText = ({ text, className }: { text: string; className?: string })
           transition={{
             duration: 0.6,
             delay: i * 0.08,
-            ease: [0.22, 1, 0.36, 1],
           }}
         >
           {word}
@@ -163,7 +159,7 @@ export default function HeroSection() {
       <motion.header
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.6 }}
       >
         <nav
           data-state={menuState && "active"}
@@ -377,7 +373,7 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.6 }}
             >
               Trusted by innovative companies worldwide.
             </motion.h2>
