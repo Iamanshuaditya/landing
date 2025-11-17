@@ -4,6 +4,7 @@ import NumberFlow from "@number-flow/react";
 import { motion } from "framer-motion";
 import { Rocket } from "lucide-react";
 import React from "react";
+import { useInView } from "react-intersection-observer";
 
 import { cn } from "@/lib/utils";
 
@@ -21,8 +22,13 @@ const css = `
   }`;
 
 const StatsSection = () => {
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
   return (
-    <section className="relative -mt-8  py-32 overflow-hidden">
+    <section ref={ref} className="relative -mt-8  py-32 overflow-hidden">
       <style>{css}</style>
 
       {/* Background blur gradient */}
@@ -32,14 +38,14 @@ const StatsSection = () => {
         <div className="mx-auto max-w-3xl text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6 }}
           >
             <h1 className="w-full font-calSans text-5xl font-medium tracking-tight lg:text-7xl bg-gradient-to-b from-white to-gray-400 bg-clip-text text-transparent">
-              MVP Built Fast. Success Delivered.
+              AI Solutions Built Fast. Intelligence Delivered.
             </h1>
             <p className="mt-6 text-lg tracking-tight text-gray-400 lg:text-xl max-w-2xl mx-auto leading-relaxed">
-              Rapid. Reliable. MVPs, redefined.
+              Rapid. Intelligent. AI solutions, redefined.
             </p>
           </motion.div>
         </div>
@@ -60,7 +66,7 @@ const StatsSection = () => {
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{
                 duration: 0.6,
                 delay: index * 0.15,
@@ -69,7 +75,7 @@ const StatsSection = () => {
               }}
               className="h-full w-full"
             >
-              <BarChart {...props} />
+              <BarChart {...props} inView={inView} />
             </motion.div>
           ))}
         </div>
@@ -86,19 +92,21 @@ const BarChart = ({
   className = "",
   showToolTip = false,
   delay = 0,
+  inView = false,
 }: {
   value: number;
   label: string;
   className?: string;
   showToolTip?: boolean;
   delay?: number;
+  inView?: boolean;
 }) => {
   return (
     <div className="group relative h-full w-full">
       <div className="candy-bg relative h-full w-full overflow-hidden rounded-3xl hover:border-white/20 transition-all duration-300">
         <motion.div
           initial={{ opacity: 0, y: 100, height: 0 }}
-          animate={{ opacity: 1, y: 0, height: `${value}%` }}
+          animate={inView ? { opacity: 1, y: 0, height: `${value}%` } : { opacity: 0, y: 100, height: 0 }}
           transition={{ duration: 0.8, type: "spring", damping: 20, delay }}
           className={cn(
             "absolute bottom-0 mt-auto w-full rounded-3xl bg-gradient-to-t from-gray-600 to-gray-500 p-4 text-white shadow-2xl",
@@ -120,13 +128,13 @@ const BarChart = ({
 
       <motion.div
         initial={{ opacity: 0, y: 100, height: 0 }}
-        animate={{ opacity: 1, y: 0, height: `${value}%` }}
+        animate={inView ? { opacity: 1, y: 0, height: `${value}%` } : { opacity: 0, y: 100, height: 0 }}
         transition={{ duration: 0.8, type: "spring", damping: 15, delay }}
         className="absolute bottom-0 w-full"
       >
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: showToolTip ? 1 : 0, y: showToolTip ? 0 : 20 }}
+          animate={inView ? { opacity: showToolTip ? 1 : 0, y: showToolTip ? 0 : 20 } : { opacity: 0, y: 20 }}
           transition={{
             duration: 0.6,
             type: "spring",

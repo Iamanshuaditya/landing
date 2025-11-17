@@ -1,23 +1,170 @@
 "use client";
 import { Logo } from "@/components/logo";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, Triangle, X } from "lucide-react";
 import Image from "next/image";
+import { motion, useAnimation, useInView } from "framer-motion";
 
 const menuItems = [
-  { name: "Services", href: "#" },
+  { name: "AI Solutions", href: "#" },
   { name: "Portfolio", href: "#" },
   { name: "Pricing", href: "#" },
   { name: "About", href: "#" },
 ];
 
+// Animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const textVariants = {
+  hidden: { 
+    opacity: 0, 
+    y: 30,
+    filter: "blur(10px)",
+  },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    filter: "blur(0px)",
+    transition: {
+      duration: 0.8,
+      ease: [0.22, 1, 0.36, 1], // Custom easing for smooth motion
+    },
+  },
+};
+
+const headingVariants = {
+  hidden: { 
+    y: 40,
+  },
+  visible: { 
+    y: 0,
+    transition: {
+      duration: 1,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const buttonVariants = {
+  hidden: { 
+    opacity: 0, 
+    scale: 0.8,
+    y: 20,
+  },
+  visible: { 
+    opacity: 1, 
+    scale: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.34, 1.56, 0.64, 1], // Bouncy ease
+    },
+  },
+  hover: {
+    scale: 1.05,
+    transition: {
+      duration: 0.2,
+    },
+  },
+  tap: {
+    scale: 0.95,
+  },
+};
+
+const imageVariants = {
+  hidden: { 
+    opacity: 0, 
+    scale: 1.1,
+    filter: "blur(20px)",
+  },
+  visible: { 
+    opacity: 1, 
+    scale: 1,
+    filter: "blur(0px)",
+    transition: {
+      duration: 1.2,
+      ease: [0.22, 1, 0.36, 1],
+      delay: 0.4,
+    },
+  },
+};
+
+const logoVariants = {
+  hidden: { 
+    opacity: 0, 
+    y: 20,
+    scale: 0.9,
+  },
+  visible: (i: number) => ({ 
+    opacity: 1, 
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.5,
+      delay: i * 0.05,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  }),
+  hover: {
+    scale: 1.1,
+    y: -5,
+    transition: {
+      duration: 0.2,
+    },
+  },
+};
+
+// Animated text component for word-by-word reveal with blur effect
+const AnimatedText = ({ text, className }: { text: string; className?: string }) => {
+  const words = text.split(" ");
+  
+  return (
+    <span className={className || ""}>
+      {words.map((word, i) => (
+        <motion.span
+          key={i}
+          className="inline-block mr-2"
+          style={{ 
+            WebkitTextFillColor: 'transparent',
+            backgroundImage: 'radial-gradient(61.17% 178.53% at 38.83% -13.54%, #3B3B3B 0%, #888787 12.61%, #FFFFFF 50%, #888787 80%, #3B3B3B 100%)',
+            WebkitBackgroundClip: 'text',
+            backgroundClip: 'text',
+          }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: 0.6,
+            delay: i * 0.08,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+        >
+          {word}
+        </motion.span>
+      ))}
+    </span>
+  );
+};
+
 export default function HeroSection() {
   const [menuState, setMenuState] = useState(false);
   return (
     <>
-      <header>
+      <motion.header
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      >
         <nav
           data-state={menuState && "active"}
           className="fixed z-20 w-full border-b border-dashed bg-white backdrop-blur md:relative dark:bg-zinc-950/50 lg:dark:bg-transparent"
@@ -25,14 +172,25 @@ export default function HeroSection() {
           <div className="m-auto max-w-5xl px-6">
             <div className="flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-4">
               <div className="flex w-full justify-between lg:w-auto">
-                <Link
-                  href="/"
-                  aria-label="home"
-                  className="flex items-center space-x-2"
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ duration: 0.2 }}
                 >
-                  <Triangle />
-                  <h3 className="text-lg">MVPCraft</h3>
-                </Link>
+                  <Link
+                    href="/"
+                    aria-label="home"
+                    className="flex items-center space-x-2"
+                  >
+                    <motion.div
+                      animate={{ rotate: [0, 5, -5, 0] }}
+                      transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+                    >
+                      <Triangle />
+                    </motion.div>
+                    <h3 className="text-lg">NeuronAI</h3>
+                  </Link>
+                </motion.div>
 
                 <button
                   onClick={() => setMenuState(!menuState)}
@@ -76,33 +234,91 @@ export default function HeroSection() {
             </div>
           </div>
         </nav>
-      </header>
+      </motion.header>
 
       <main>
-        <div
+        <motion.div
           aria-hidden
           className="z-2 absolute inset-0 isolate hidden opacity-50 contain-strict lg:block"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.5 }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
         >
-          <div className="w-140 h-320 -translate-y-87.5 absolute left-0 top-0 -rotate-45 rounded-full bg-[radial-gradient(68.54%_68.72%_at_55.02%_31.46%,hsla(0,0%,85%,.08)_0,hsla(0,0%,55%,.02)_50%,hsla(0,0%,45%,0)_80%)]" />
-          <div className="h-320 absolute left-0 top-0 w-60 -rotate-45 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,hsla(0,0%,85%,.06)_0,hsla(0,0%,45%,.02)_80%,transparent_100%)] [translate:5%_-50%]" />
-          <div className="h-320 -translate-y-87.5 absolute left-0 top-0 w-60 -rotate-45 bg-[radial-gradient(50%_50%_at_50%_50%,hsla(0,0%,85%,.04)_0,hsla(0,0%,45%,.02)_80%,transparent_100%)]" />
-        </div>
+          <motion.div 
+            className="w-140 h-320 -translate-y-87.5 absolute left-0 top-0 -rotate-45 rounded-full bg-[radial-gradient(68.54%_68.72%_at_55.02%_31.46%,hsla(0,0%,85%,.08)_0,hsla(0,0%,55%,.02)_50%,hsla(0,0%,45%,0)_80%)]"
+            animate={{
+              y: [0, -20, 0],
+              x: [0, 10, 0],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+          <motion.div 
+            className="h-320 absolute left-0 top-0 w-60 -rotate-45 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,hsla(0,0%,85%,.06)_0,hsla(0,0%,45%,.02)_80%,transparent_100%)] [translate:5%_-50%]"
+            animate={{
+              y: [0, 15, 0],
+              x: [0, -8, 0],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 0.5,
+            }}
+          />
+          <motion.div 
+            className="h-320 -translate-y-87.5 absolute left-0 top-0 w-60 -rotate-45 bg-[radial-gradient(50%_50%_at_50%_50%,hsla(0,0%,85%,.04)_0,hsla(0,0%,45%,.02)_80%,transparent_100%)]"
+            animate={{
+              y: [0, -12, 0],
+              x: [0, 5, 0],
+            }}
+            transition={{
+              duration: 12,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 1,
+            }}
+          />
+        </motion.div>
 
         <section className="overflow-hidden bg-white dark:bg-transparent">
           <div className="relative mx-auto max-w-5xl px-6 py-28 lg:py-24">
-            <div className="relative z-10 mx-auto max-w-2xl text-center">
-              <h2 className="">Transform Ideas Into Reality</h2>
-              <p className="mx-auto my-8 max-w-2xl text-lg">
-                We build custom MVPs for startups. From concept to launch in 8 weeks.
-                Validate your business idea fast.
-              </p>
+            <motion.div 
+              className="relative z-10 mx-auto max-w-2xl text-center"
+              initial="hidden"
+              animate="visible"
+              variants={containerVariants}
+            >
+              <motion.h2 
+                className="text-4xl font-semibold md:text-5xl lg:text-6xl"
+                variants={headingVariants}
+              >
+                <AnimatedText text="Intelligent AI Solutions for Tomorrow" />
+              </motion.h2>
+              
+              <motion.p 
+                className="mx-auto my-8 max-w-2xl text-lg"
+                variants={textVariants}
+              >
+                We build cutting-edge AI solutions and intelligent systems. From concept to deployment in 8 weeks.
+                Transform your business with artificial intelligence.
+              </motion.p>
 
-              <Button asChild size="lg">
-                <Link href="#">
-                  <span className="btn-label">Start Your MVP</span>
-                </Link>
-              </Button>
-            </div>
+              <motion.div
+                variants={buttonVariants}
+                whileHover="hover"
+                whileTap="tap"
+              >
+                <Button asChild size="lg">
+                  <Link href="#">
+                    <span className="btn-label">Start Your AI Journey</span>
+                  </Link>
+                </Button>
+              </motion.div>
+            </motion.div>
           </div>
 
           <div className="mx-auto -mt-16 max-w-7xl">
@@ -135,13 +351,20 @@ export default function HeroSection() {
                     className="z-2 absolute inset-0 size-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,transparent_40%,var(--color-background)_100%)]"
                   />
 
-                  <Image
-                    className="rounded-3xl mt-8 z-1 relative hidden border dark:block object-center"
-                    src="https://cdn.dribbble.com/userupload/18736499/file/original-f6f19f9124595fd0b64f29eebf219f31.jpg?resize=1504x1128&vertical=center"
-                    alt="HeroSection"
-                    width={2880}
-                    height={2074}
-                  />
+                  <motion.div
+                    variants={imageVariants}
+                    initial="hidden"
+                    animate="visible"
+                    className="relative"
+                  >
+                    <Image
+                      className="rounded-3xl mt-8 z-1 relative hidden border dark:block object-center"
+                      src="https://cdn.dribbble.com/userupload/18736499/file/original-f6f19f9124595fd0b64f29eebf219f31.jpg?resize=1504x1128&vertical=center"
+                      alt="HeroSection"
+                      width={2880}
+                      height={2074}
+                    />
+                  </motion.div>
                 </div>
               </div>
             </div>
@@ -149,88 +372,48 @@ export default function HeroSection() {
         </section>
         <section className="bg-background relative z-10 py-16">
           <div className="m-auto max-w-5xl flex flex-col items-center mt-16 px-6">
-            <h2 className="text-center text-2xl font-medium">
-              Trusted by innovative startups worldwide.
-            </h2>
-            <div className="mx-auto mt-20 flex max-w-4xl flex-wrap items-center justify-center gap-x-12 gap-y-8 sm:gap-x-16 sm:gap-y-12">
-              <img
-                className="h-5 w-fit dark:invert"
-                src="https://html.tailus.io/blocks/customers/nvidia.svg"
-                alt="Nvidia Logo"
-                height="20"
-                width="auto"
-              />
-              <img
-                className="h-4 w-fit dark:invert"
-                src="https://html.tailus.io/blocks/customers/column.svg"
-                alt="Column Logo"
-                height="16"
-                width="auto"
-              />
-              <img
-                className="h-4 w-fit dark:invert"
-                src="https://html.tailus.io/blocks/customers/github.svg"
-                alt="GitHub Logo"
-                height="16"
-                width="auto"
-              />
-              <img
-                className="h-5 w-fit dark:invert"
-                src="https://html.tailus.io/blocks/customers/nike.svg"
-                alt="Nike Logo"
-                height="20"
-                width="auto"
-              />
-              <img
-                className="h-4 w-fit dark:invert"
-                src="https://html.tailus.io/blocks/customers/laravel.svg"
-                alt="Laravel Logo"
-                height="16"
-                width="auto"
-              />
-              <img
-                className="h-7 w-fit dark:invert"
-                src="https://html.tailus.io/blocks/customers/lilly.svg"
-                alt="Lilly Logo"
-                height="28"
-                width="auto"
-              />
-              <img
-                className="h-5 w-fit dark:invert"
-                src="https://html.tailus.io/blocks/customers/lemonsqueezy.svg"
-                alt="Lemon Squeezy Logo"
-                height="20"
-                width="auto"
-              />
-              <img
-                className="h-6 w-fit dark:invert"
-                src="https://html.tailus.io/blocks/customers/openai.svg"
-                alt="OpenAI Logo"
-                height="24"
-                width="auto"
-              />
-              <img
-                className="h-4 w-fit dark:invert"
-                src="https://html.tailus.io/blocks/customers/tailwindcss.svg"
-                alt="Tailwind CSS Logo"
-                height="16"
-                width="auto"
-              />
-              <img
-                className="h-5 w-fit dark:invert"
-                src="https://html.tailus.io/blocks/customers/vercel.svg"
-                alt="Vercel Logo"
-                height="20"
-                width="auto"
-              />
-              <img
-                className="h-5 w-fit dark:invert"
-                src="https://html.tailus.io/blocks/customers/zapier.svg"
-                alt="Zapier Logo"
-                height="20"
-                width="auto"
-              />
-            </div>
+            <motion.h2 
+              className="text-center text-2xl font-medium"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            >
+              Trusted by innovative companies worldwide.
+            </motion.h2>
+            <motion.div 
+              className="mx-auto mt-20 flex max-w-4xl flex-wrap items-center justify-center gap-x-12 gap-y-8 sm:gap-x-16 sm:gap-y-12"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+              variants={containerVariants}
+            >
+              {[
+                { src: "https://html.tailus.io/blocks/customers/nvidia.svg", alt: "Nvidia Logo", height: "20", className: "h-5" },
+                { src: "https://html.tailus.io/blocks/customers/column.svg", alt: "Column Logo", height: "16", className: "h-4" },
+                { src: "https://html.tailus.io/blocks/customers/github.svg", alt: "GitHub Logo", height: "16", className: "h-4" },
+                { src: "https://html.tailus.io/blocks/customers/nike.svg", alt: "Nike Logo", height: "20", className: "h-5" },
+                { src: "https://html.tailus.io/blocks/customers/laravel.svg", alt: "Laravel Logo", height: "16", className: "h-4" },
+                { src: "https://html.tailus.io/blocks/customers/lilly.svg", alt: "Lilly Logo", height: "28", className: "h-7" },
+                { src: "https://html.tailus.io/blocks/customers/lemonsqueezy.svg", alt: "Lemon Squeezy Logo", height: "20", className: "h-5" },
+                { src: "https://html.tailus.io/blocks/customers/openai.svg", alt: "OpenAI Logo", height: "24", className: "h-6" },
+                { src: "https://html.tailus.io/blocks/customers/tailwindcss.svg", alt: "Tailwind CSS Logo", height: "16", className: "h-4" },
+                { src: "https://html.tailus.io/blocks/customers/vercel.svg", alt: "Vercel Logo", height: "20", className: "h-5" },
+                { src: "https://html.tailus.io/blocks/customers/zapier.svg", alt: "Zapier Logo", height: "20", className: "h-5" },
+              ].map((logo, index) => (
+                <motion.img
+                  key={index}
+                  className={`${logo.className} w-fit dark:invert cursor-pointer`}
+                  src={logo.src}
+                  alt={logo.alt}
+                  height={logo.height}
+                  width="auto"
+                  custom={index}
+                  variants={logoVariants}
+                  whileHover="hover"
+                />
+              ))}
+            </motion.div>
           </div>
         </section>
       </main>

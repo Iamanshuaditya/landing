@@ -1,7 +1,9 @@
 "use client";
 
 import AutoScroll from "embla-carousel-auto-scroll";
+import { motion } from "framer-motion";
 import { useRef } from "react";
+import { useInView } from "react-intersection-observer";
 
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -19,7 +21,7 @@ const testimonials1 = [
     avatar:
       "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/avatar-1.webp",
     content:
-      "Their MVP delivered our vision perfectly. From idea to launch in just 8 weeks.",
+      "Their AI solution delivered our vision perfectly. From concept to deployment in just 8 weeks.",
   },
   {
     name: "Marcus Reid",
@@ -27,7 +29,7 @@ const testimonials1 = [
     avatar:
       "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/avatar-2.webp",
     content:
-      "Exceptional team that understands startups. Built exactly what we needed to validate our market.",
+      "Exceptional team that understands AI. Built exactly what we needed to revolutionize our industry.",
   },
   {
     name: "Elena Rodriguez",
@@ -35,7 +37,7 @@ const testimonials1 = [
     avatar:
       "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/avatar-3.webp",
     content:
-      "Fast, reliable, and innovative. They turned our concept into a working product seamlessly.",
+      "Fast, reliable, and innovative. They turned our AI concept into an intelligent system seamlessly.",
   },
   {
     name: "David Kim",
@@ -43,7 +45,7 @@ const testimonials1 = [
     avatar:
       "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/avatar-4.webp",
     content:
-      "Outstanding MVP development. They helped us secure our first round of funding successfully.",
+      "Outstanding AI solution development. They helped us secure our first round of funding successfully.",
   },
   {
     name: "Lisa Thompson",
@@ -114,6 +116,11 @@ const testimonials2 = [
 ];
 
 const TestimonialSection = () => {
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
   const plugin1 = useRef(
     AutoScroll({
       startDelay: 500,
@@ -129,15 +136,37 @@ const TestimonialSection = () => {
     })
   );
   return (
-    <section className="relative py-32 max-w-7xl mx-auto overflow-hidden">
-      <div className="container flex flex-col items-center gap-6">
-        <h2 className="mb-2 ">Trusted by Innovators</h2>
-        <p className="text-center ">
-          From concept to launch, we build MVPs that validate ideas and drive growth.
-        </p>
-      </div>
+    <section ref={ref} className="relative py-32 max-w-7xl mx-auto overflow-hidden">
+      <motion.div
+        className="container flex flex-col items-center gap-6"
+        initial={{ opacity: 0, y: 30 }}
+        animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+        transition={{ duration: 0.6 }}
+      >
+        <motion.h2
+          className="mb-2"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+          transition={{ delay: 0.2, duration: 0.5, type: "spring" }}
+        >
+          Trusted by AI Innovators
+        </motion.h2>
+        <motion.p
+          className="text-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ delay: 0.3, duration: 0.6 }}
+        >
+          From concept to deployment, we build AI solutions that transform businesses and drive innovation.
+        </motion.p>
+      </motion.div>
       <div className="lg:container">
-        <div className="mt-16 space-y-4 relative">
+        <motion.div
+          className="mt-16 space-y-4 relative"
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ delay: 0.4, duration: 0.6 }}
+        >
           {/* Left and right blur gradients */}
           <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white dark:from-background to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white dark:from-background to-transparent z-10 pointer-events-none" />
@@ -151,27 +180,38 @@ const TestimonialSection = () => {
             <CarouselContent>
               {testimonials1.map((testimonial, index) => (
                 <CarouselItem key={index} className="basis-auto">
-                  <Card className="max-w-96 p-6 select-none bg-white/80 dark:bg-black/60 backdrop-blur-md border border-neutral-200 dark:border-neutral-800 shadow-md rounded-2xl">
-                    <div className="mb-4 flex gap-4 items-center">
-                      <Avatar className="size-10 rounded-full ring-2 ring-[#6EE7B7]/60 shadow">
-                        <AvatarImage
-                          src={testimonial.avatar}
-                          alt={testimonial.name}
-                        />
-                      </Avatar>
-                      <div className="text-sm">
-                        <p className="font-semibold text-neutral-900 dark:text-white">
-                          {testimonial.name}
-                        </p>
-                        <p className="text-muted-foreground">
-                          {testimonial.role}
-                        </p>
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                    animate={inView ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.95, y: 20 }}
+                    transition={{
+                      delay: 0.5 + index * 0.05,
+                      duration: 0.4,
+                    }}
+                    whileHover={{ scale: 1.02, y: -3 }}
+                    className="transition-all duration-300"
+                  >
+                    <Card className="max-w-96 p-6 select-none bg-white/80 dark:bg-black/60 backdrop-blur-md border border-neutral-200 dark:border-neutral-800 shadow-md rounded-2xl hover:shadow-lg transition-shadow duration-300">
+                      <div className="mb-4 flex gap-4 items-center">
+                        <Avatar className="size-10 rounded-full ring-2 ring-[#6EE7B7]/60 shadow">
+                          <AvatarImage
+                            src={testimonial.avatar}
+                            alt={testimonial.name}
+                          />
+                        </Avatar>
+                        <div className="text-sm">
+                          <p className="font-semibold text-neutral-900 dark:text-white">
+                            {testimonial.name}
+                          </p>
+                          <p className="text-muted-foreground">
+                            {testimonial.role}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                    <q className="text-base text-neutral-700 dark:text-neutral-200 italic">
-                      {testimonial.content}
-                    </q>
-                  </Card>
+                      <q className="text-base text-neutral-700 dark:text-neutral-200 italic">
+                        {testimonial.content}
+                      </q>
+                    </Card>
+                  </motion.div>
                 </CarouselItem>
               ))}
             </CarouselContent>
@@ -186,32 +226,43 @@ const TestimonialSection = () => {
             <CarouselContent>
               {testimonials2.map((testimonial, index) => (
                 <CarouselItem key={index} className="basis-auto">
-                  <Card className="max-w-96 p-6 select-none bg-white/80 dark:bg-black/60 backdrop-blur-md border border-neutral-200 dark:border-neutral-800 shadow-md rounded-2xl">
-                    <div className="mb-4 flex gap-4 items-center">
-                      <Avatar className="size-10 rounded-full ring-2 ring-[#3B82F6]/60 shadow">
-                        <AvatarImage
-                          src={testimonial.avatar}
-                          alt={testimonial.name}
-                        />
-                      </Avatar>
-                      <div className="text-sm">
-                        <p className="font-semibold text-neutral-900 dark:text-white">
-                          {testimonial.name}
-                        </p>
-                        <p className="text-muted-foreground">
-                          {testimonial.role}
-                        </p>
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                    animate={inView ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.95, y: 20 }}
+                    transition={{
+                      delay: 0.6 + index * 0.05,
+                      duration: 0.4,
+                    }}
+                    whileHover={{ scale: 1.02, y: -3 }}
+                    className="transition-all duration-300"
+                  >
+                    <Card className="max-w-96 p-6 select-none bg-white/80 dark:bg-black/60 backdrop-blur-md border border-neutral-200 dark:border-neutral-800 shadow-md rounded-2xl hover:shadow-lg transition-shadow duration-300">
+                      <div className="mb-4 flex gap-4 items-center">
+                        <Avatar className="size-10 rounded-full ring-2 ring-[#3B82F6]/60 shadow">
+                          <AvatarImage
+                            src={testimonial.avatar}
+                            alt={testimonial.name}
+                          />
+                        </Avatar>
+                        <div className="text-sm">
+                          <p className="font-semibold text-neutral-900 dark:text-white">
+                            {testimonial.name}
+                          </p>
+                          <p className="text-muted-foreground">
+                            {testimonial.role}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                    <q className="text-base text-neutral-700 dark:text-neutral-200 italic">
-                      {testimonial.content}
-                    </q>
-                  </Card>
+                      <q className="text-base text-neutral-700 dark:text-neutral-200 italic">
+                        {testimonial.content}
+                      </q>
+                    </Card>
+                  </motion.div>
                 </CarouselItem>
               ))}
             </CarouselContent>
           </Carousel>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

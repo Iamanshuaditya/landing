@@ -18,7 +18,7 @@ const BentoGrid = () => {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent" />
             <div className="absolute bottom-6 left-6 z-10 text-white">
-              <h3 className="text-lg ">Transform Ideas Into MVPs.</h3>
+              <h3 className="text-lg ">Transform Ideas Into AI Solutions.</h3>
             </div>
             <div className="absolute right-6 top-6 z-10">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20">
@@ -54,7 +54,7 @@ const BentoGrid = () => {
             <div className="absolute inset-0 bg-gradient-to-tr from-background to-transparent" />
             <div className="absolute bottom-6 left-6 right-6 z-10">
               <h3 className="text-sm leading-tight md:text-base lg:text-xl">
-                Rapid MVP development cycle
+                Rapid AI solution development
               </h3>
             </div>
           </div>
@@ -68,7 +68,7 @@ const BentoGrid = () => {
                 </span>
               </div>
               <p className="text-sm leading-tight md:text-sm">
-                Average MVP delivery
+                Average AI solution delivery
                 <br />
                 time for our clients
               </p>
@@ -90,7 +90,7 @@ const BentoGrid = () => {
                   <div className="text-4xl font-normal md:text-5xl lg:text-6xl">
                     $5k
                   </div>
-                  <div className="text-muted-foreground">Starting MVP price</div>
+                  <div className="text-muted-foreground">Starting AI solution price</div>
                   <Button>Get Started</Button>
                 </div>
               </div>
@@ -108,7 +108,7 @@ const BentoGrid = () => {
                 </span>
               </div>
               <p className="mb-4 ml-0 text-sm md:text-sm">
-                Successful MVPs launched
+                Successful AI solutions launched
               </p>
               <div className="flex -space-x-2">
                 {[1, 2, 3, 4, 5].map((i) => (
@@ -147,14 +147,14 @@ const BentoGrid = () => {
                     <Clock className="h-3 w-3 md:h-4 md:w-4" />
                   </div>
                   <span className="text-base  text-shadow-2xs md:text-lg">
-                    Launch Fast MVPs
+                    Launch AI Solutions Fast
                   </span>
                 </div>
                 <p className="text-sm opacity-90 md:text-sm">
-                  Expert agency for
+                  Expert AI agency for
                   <br />
                   <span className="text-sm font-semibold md:text-sm">
-                    rapid product launches
+                    rapid intelligent deployments
                   </span>
                 </p>
               </div>

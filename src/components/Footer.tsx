@@ -13,10 +13,10 @@ const navigation = [
   {
     title: "Services",
     links: [
-      { name: "MVP Development", href: "#" },
-      { name: "Product Strategy", href: "#" },
-      { name: "UI/UX Design", href: "#" },
-      { name: "Tech Consulting", href: "#" },
+      { name: "AI Development", href: "#" },
+      { name: "Machine Learning", href: "#" },
+      { name: "AI Strategy", href: "#" },
+      { name: "AI Consulting", href: "#" },
     ],
   },
   {
@@ -57,20 +57,20 @@ const FooterSection = () => {
           <div className="mb-16 rounded-2xl bg-primary-foreground/5 p-8 backdrop-blur-sm md:p-12 lg:p-16">
             <div className="flex flex-col items-center text-center">
               <h2 className="max-w-[800px] text-4xl leading-tight font-semibold tracking-tight text-balance md:text-5xl lg:text-6xl">
-                Ready to build your MVP?
+                Ready to build your AI solution?
                 <span className=" relative text-white/80 inline-block">
-                  Let&apos;s bring your idea to life.
+                  Let&apos;s bring your intelligence to life.
                   <span className=" absolute bottom-1 left-0 h-1 w-full rounded-full"></span>
                 </span>
               </h2>
               <p className="mt-4 max-w-[600px] text-lg ">
-                Join hundreds of startups who trust us to transform their ideas
-                into market-ready products.
+                Join hundreds of companies who trust us to transform their ideas
+                into intelligent AI systems.
               </p>
               <div className="mt-8 flex flex-col gap-4 sm:flex-row">
                 <Button asChild variant="secondary" size="lg" className="group">
                   <a href="/get-started" className="flex items-center gap-2">
-                    Start your MVP project today
+                    Start your AI project today
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </a>
                 </Button>
@@ -84,7 +84,7 @@ const FooterSection = () => {
               <div>
                 <h3 className="mb-2 text-2xl font-medium">Stay connected</h3>
                 <p className="ml-0 text-left">
-                  Get insights on MVP development and startup trends.
+                  Get insights on AI development and technology trends.
                 </p>
               </div>
               <div className="flex flex-col gap-3 sm:flex-row">
@@ -133,7 +133,7 @@ const FooterSection = () => {
                   className="underline transition-colors hover:text-primary-foreground"
                   target="_blank"
                 >
-                  MVPCraft
+                  NeuronAI
                 </a>
               </p>
               <div className="flex items-center gap-6">
