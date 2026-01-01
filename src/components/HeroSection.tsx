@@ -27,13 +27,13 @@ const containerVariants = {
 };
 
 const textVariants = {
-  hidden: { 
-    opacity: 0, 
+  hidden: {
+    opacity: 0,
     y: 30,
     filter: "blur(10px)",
   },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     y: 0,
     filter: "blur(0px)",
     transition: {
@@ -43,10 +43,10 @@ const textVariants = {
 };
 
 const headingVariants = {
-  hidden: { 
+  hidden: {
     y: 40,
   },
-  visible: { 
+  visible: {
     y: 0,
     transition: {
       duration: 1,
@@ -55,18 +55,18 @@ const headingVariants = {
 };
 
 const buttonVariants = {
-  hidden: { 
-    opacity: 0, 
+  hidden: {
+    opacity: 0,
     scale: 0.8,
     y: 20,
   },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     scale: 1,
     y: 0,
     transition: {
       duration: 0.6,
-      type: "spring",
+      type: "spring" as const,
       stiffness: 200,
     },
   },
@@ -82,13 +82,13 @@ const buttonVariants = {
 };
 
 const imageVariants = {
-  hidden: { 
-    opacity: 0, 
+  hidden: {
+    opacity: 0,
     scale: 1.1,
     filter: "blur(20px)",
   },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     scale: 1,
     filter: "blur(0px)",
     transition: {
@@ -99,13 +99,13 @@ const imageVariants = {
 };
 
 const logoVariants = {
-  hidden: { 
-    opacity: 0, 
+  hidden: {
+    opacity: 0,
     y: 20,
     scale: 0.9,
   },
-  visible: (i: number) => ({ 
-    opacity: 1, 
+  visible: (i: number) => ({
+    opacity: 1,
     y: 0,
     scale: 1,
     transition: {
@@ -125,14 +125,14 @@ const logoVariants = {
 // Animated text component for word-by-word reveal with blur effect
 const AnimatedText = ({ text, className }: { text: string; className?: string }) => {
   const words = text.split(" ");
-  
+
   return (
     <span className={className || ""}>
       {words.map((word, i) => (
         <motion.span
           key={i}
           className="inline-block mr-2"
-          style={{ 
+          style={{
             WebkitTextFillColor: 'transparent',
             backgroundImage: 'radial-gradient(61.17% 178.53% at 38.83% -13.54%, #3B3B3B 0%, #888787 12.61%, #FFFFFF 50%, #888787 80%, #3B3B3B 100%)',
             WebkitBackgroundClip: 'text',
@@ -240,7 +240,7 @@ export default function HeroSection() {
           animate={{ opacity: 0.5 }}
           transition={{ duration: 1.5, ease: "easeOut" }}
         >
-          <motion.div 
+          <motion.div
             className="w-140 h-320 -translate-y-87.5 absolute left-0 top-0 -rotate-45 rounded-full bg-[radial-gradient(68.54%_68.72%_at_55.02%_31.46%,hsla(0,0%,85%,.08)_0,hsla(0,0%,55%,.02)_50%,hsla(0,0%,45%,0)_80%)]"
             animate={{
               y: [0, -20, 0],
@@ -252,7 +252,7 @@ export default function HeroSection() {
               ease: "easeInOut",
             }}
           />
-          <motion.div 
+          <motion.div
             className="h-320 absolute left-0 top-0 w-60 -rotate-45 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,hsla(0,0%,85%,.06)_0,hsla(0,0%,45%,.02)_80%,transparent_100%)] [translate:5%_-50%]"
             animate={{
               y: [0, 15, 0],
@@ -265,7 +265,7 @@ export default function HeroSection() {
               delay: 0.5,
             }}
           />
-          <motion.div 
+          <motion.div
             className="h-320 -translate-y-87.5 absolute left-0 top-0 w-60 -rotate-45 bg-[radial-gradient(50%_50%_at_50%_50%,hsla(0,0%,85%,.04)_0,hsla(0,0%,45%,.02)_80%,transparent_100%)]"
             animate={{
               y: [0, -12, 0],
@@ -282,20 +282,20 @@ export default function HeroSection() {
 
         <section className="overflow-hidden bg-white dark:bg-transparent">
           <div className="relative mx-auto max-w-5xl px-6 py-28 lg:py-24">
-            <motion.div 
+            <motion.div
               className="relative z-10 mx-auto max-w-2xl text-center"
               initial="hidden"
               animate="visible"
               variants={containerVariants}
             >
-              <motion.h2 
+              <motion.h2
                 className="text-4xl font-semibold md:text-5xl lg:text-6xl"
                 variants={headingVariants}
               >
                 <AnimatedText text="Intelligent AI Solutions for Tomorrow" />
               </motion.h2>
-              
-              <motion.p 
+
+              <motion.p
                 className="mx-auto my-8 max-w-2xl text-lg"
                 variants={textVariants}
               >
@@ -368,7 +368,7 @@ export default function HeroSection() {
         </section>
         <section className="bg-background relative z-10 py-16">
           <div className="m-auto max-w-5xl flex flex-col items-center mt-16 px-6">
-            <motion.h2 
+            <motion.h2
               className="text-center text-2xl font-medium"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -377,7 +377,7 @@ export default function HeroSection() {
             >
               Trusted by innovative companies worldwide.
             </motion.h2>
-            <motion.div 
+            <motion.div
               className="mx-auto mt-20 flex max-w-4xl flex-wrap items-center justify-center gap-x-12 gap-y-8 sm:gap-x-16 sm:gap-y-12"
               initial="hidden"
               whileInView="visible"
