@@ -26,22 +26,22 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
     if (!category) {
         return {
-            title: 'Category Not Found | NeuronAI',
+            title: 'Category Not Found | Smart Builds',
         };
     }
 
     return {
-        title: `${category.name} Resources | NeuronAI`,
+        title: `${category.name} Resources | Smart Builds`,
         description: category.description,
         openGraph: {
-            title: `${category.name} Resources | NeuronAI`,
+            title: `${category.name} Resources | Smart Builds`,
             description: category.description,
-            url: `https://neuronai.com/ai/category/${categoryId}`,
-            siteName: 'NeuronAI',
+            url: `https://www.smartbuilds.in/ai/category/${categoryId}`,
+            siteName: 'Smart Builds',
             type: 'website',
         },
         alternates: {
-            canonical: `https://neuronai.com/ai/category/${categoryId}`,
+            canonical: `https://www.smartbuilds.in/ai/category/${categoryId}`,
         },
     };
 }
@@ -151,7 +151,7 @@ export default async function CategoryPage({ params }: PageProps) {
             {/* Footer */}
             <footer className="border-t border-neutral-800 py-8">
                 <div className="container mx-auto max-w-5xl px-4 text-center text-neutral-500">
-                    <p>© {new Date().getFullYear()} NeuronAI. All rights reserved.</p>
+                    <p>© {new Date().getFullYear()} Smart Builds. All rights reserved.</p>
                 </div>
             </footer>
         </div>

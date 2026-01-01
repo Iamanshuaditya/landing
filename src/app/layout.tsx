@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "NeuronAI - Intelligent AI Solutions",
-  description: "We build cutting-edge AI solutions and intelligent systems. Transform your business with artificial intelligence.",
+  title: "Smart Builds - AI-Powered Construction & Building Solutions",
+  description: "AI-powered platform for scalable, intelligent building and construction workflows. Transform your projects with Smart Builds.",
 };
 
 export default function RootLayout({

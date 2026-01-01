@@ -18,7 +18,7 @@ export function PSEOPageLayout({ page }: PSEOPageLayoutProps) {
                 <nav className="container mx-auto max-w-4xl px-4 py-4">
                     <div className="flex items-center justify-between">
                         <Link href="/" className="text-xl font-semibold">
-                            NeuronAI
+                            Smart Builds
                         </Link>
                         <Breadcrumbs page={page} />
                     </div>
@@ -83,7 +83,7 @@ export function PSEOPageLayout({ page }: PSEOPageLayoutProps) {
             {/* Footer */}
             <footer className="border-t border-neutral-800 py-8">
                 <div className="container mx-auto max-w-4xl px-4 text-center text-neutral-500">
-                    <p>© {new Date().getFullYear()} NeuronAI. All rights reserved.</p>
+                    <p>© {new Date().getFullYear()} Smart Builds. All rights reserved.</p>
                 </div>
             </footer>
         </div>

@@ -9,17 +9,17 @@ import { categories, topicClusters, getTotalPageCount } from '@/lib/pseo';
 import type { Category, CategoryType } from '@/lib/pseo/types';
 
 export const metadata: Metadata = {
-    title: 'AI Resources & Guides | NeuronAI',
+    title: 'AI Resources & Guides | Smart Builds',
     description: 'Comprehensive AI resources covering machine learning, deep learning, NLP, computer vision, and practical applications. Expert guides for developers and business leaders.',
     openGraph: {
-        title: 'AI Resources & Guides | NeuronAI',
+        title: 'AI Resources & Guides | Smart Builds',
         description: 'Comprehensive AI resources covering machine learning, deep learning, NLP, computer vision, and practical applications.',
-        url: 'https://neuronai.com/ai',
-        siteName: 'NeuronAI',
+        url: 'https://www.smartbuilds.in/ai',
+        siteName: 'Smart Builds',
         type: 'website',
     },
     alternates: {
-        canonical: 'https://neuronai.com/ai',
+        canonical: 'https://www.smartbuilds.in/ai',
     },
 };
 
@@ -39,7 +39,7 @@ export default function AIHubPage() {
                 <nav className="container mx-auto max-w-6xl px-4 py-4">
                     <div className="flex items-center justify-between">
                         <Link href="/" className="text-xl font-semibold">
-                            NeuronAI
+                            Smart Builds
                         </Link>
                         <div className="text-sm text-neutral-400">
                             <span>{totalPages} articles</span>
@@ -93,7 +93,7 @@ export default function AIHubPage() {
             {/* Footer */}
             <footer className="border-t border-neutral-800 py-8">
                 <div className="container mx-auto max-w-6xl px-4 text-center text-neutral-500">
-                    <p>© {new Date().getFullYear()} NeuronAI. All rights reserved.</p>
+                    <p>© {new Date().getFullYear()} Smart Builds. All rights reserved.</p>
                 </div>
             </footer>
         </div>

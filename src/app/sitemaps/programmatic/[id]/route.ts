@@ -7,15 +7,17 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getQualifiedPages } from '@/lib/pseo';
 
 const CHUNK_SIZE = 25000;
-const BASE_URL = 'https://neuronai.com';
+const BASE_URL = 'https://www.smartbuilds.in';
 
 interface RouteParams {
     params: Promise<{ id: string }>;
 }
 
 export async function GET(request: NextRequest, { params }: RouteParams) {
-    const { id } = await params;
-    const chunkId = parseInt(id, 10);
+    const { id: rawId } = await params;
+    // Strip .xml extension if present (e.g., "1.xml" -> "1")
+    const cleanId = rawId.replace(/\.xml$/, '');
+    const chunkId = parseInt(cleanId, 10);
 
     if (isNaN(chunkId) || chunkId < 1) {
         return new NextResponse('Invalid sitemap ID', { status: 400 });

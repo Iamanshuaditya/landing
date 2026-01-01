@@ -39,23 +39,23 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
     if (!page || shouldReturn404(page)) {
         return {
-            title: 'Not Found | NeuronAI',
+            title: 'Not Found | Smart Builds',
             description: 'The requested page could not be found.',
         };
     }
 
-    const canonicalUrl = `https://neuronai.com/ai/${slug}`;
+    const canonicalUrl = `https://www.smartbuilds.in/ai/${slug}`;
 
     return {
         title: page.title,
         description: page.description,
         keywords: page.category.name,
-        authors: [{ name: 'NeuronAI' }],
+        authors: [{ name: 'Smart Builds' }],
         openGraph: {
             title: page.title,
             description: page.description,
             url: canonicalUrl,
-            siteName: 'NeuronAI',
+            siteName: 'Smart Builds',
             type: 'article',
             publishedTime: page.lastModified.toISOString(),
             modifiedTime: page.lastModified.toISOString(),

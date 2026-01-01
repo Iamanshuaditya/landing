@@ -133,7 +133,7 @@ const FooterSection = () => {
                   className="underline transition-colors hover:text-primary-foreground"
                   target="_blank"
                 >
-                  NeuronAI
+                  Smart Builds
                 </a>
               </p>
               <div className="flex items-center gap-6">

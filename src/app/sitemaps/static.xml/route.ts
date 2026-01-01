@@ -6,7 +6,7 @@
 import { NextResponse } from 'next/server';
 import { categories } from '@/lib/pseo';
 
-const BASE_URL = 'https://neuronai.com';
+const BASE_URL = 'https://www.smartbuilds.in';
 
 export async function GET() {
     const staticPages = [

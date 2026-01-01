@@ -184,7 +184,7 @@ export default function HeroSection() {
                     >
                       <Triangle />
                     </motion.div>
-                    <h3 className="text-lg">NeuronAI</h3>
+                    <h3 className="text-lg">Smart Builds</h3>
                   </Link>
                 </motion.div>
 
